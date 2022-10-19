@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ImageBackground } from "react-native";
 
 import wallpaper from "./assets/images/wallpaper.webp";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import DateAndTime from "./components/dateAndTime";
 import Footer from "./components/footer";
