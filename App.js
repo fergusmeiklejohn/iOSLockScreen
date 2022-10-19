@@ -3,8 +3,8 @@ import { StyleSheet, View, ImageBackground } from "react-native";
 
 import wallpaper from "./assets/images/wallpaper.webp";
 
-import DateAndTime from "./components/dateAndTime";
-import Footer from "./components/footer";
+import DateAndTime from "./app/components/dateAndTime";
+import Footer from "./app/components/footer";
 
 export default function App() {
   return (
