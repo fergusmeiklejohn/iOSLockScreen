@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import dayjs from "dayjs";
 import { Ionicons } from "@expo/vector-icons";
+import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
 
 export default function Header() {
   let [dateObj, setDateObj] = useState(dayjs());
@@ -18,11 +19,15 @@ export default function Header() {
   }, []);
 
   return (
-    <View style={styles.header}>
+    <Animated.View
+      entering={SlideInUp.duration(1000)}
+      exiting={SlideOutUp}
+      style={styles.header}
+    >
       <Ionicons name="ios-lock-closed" size={24} color="white" />
       <Text style={styles.date}>{date}</Text>
       <Text style={styles.time}>{time}</Text>
-    </View>
+    </Animated.View>
   );
 }
 
