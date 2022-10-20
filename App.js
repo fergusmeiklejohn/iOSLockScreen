@@ -1,16 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
 
 import wallpaper from "./assets/images/wallpaper.webp";
 
-import DateAndTime from "./app/components/dateAndTime";
 import Footer from "./app/components/footer";
+import NotificationsList from "./app/components/notificationsList";
 
 export default function App() {
   return (
     <ImageBackground source={wallpaper} style={styles.container}>
       <StatusBar style="light" />
-      <DateAndTime />
+      <NotificationsList />
       <Footer />
     </ImageBackground>
   );

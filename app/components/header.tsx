@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import dayjs from "dayjs";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function DateAndTime() {
+export default function Header() {
   let [dateObj, setDateObj] = useState(dayjs());
 
   let date = dateObj.format("dddd, MMMM D");
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 250,
+    marginTop: 20,
   },
   date: {
     color: "#C3FFFE",
