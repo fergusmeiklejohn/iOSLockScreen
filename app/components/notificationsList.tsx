@@ -7,6 +7,7 @@ import Animated, {
   useAnimatedScrollHandler,
   withTiming,
 } from "react-native-reanimated";
+import { useState } from "react";
 
 export default function NotificationsList({
   footerVisibility,

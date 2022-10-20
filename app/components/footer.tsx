@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated, {
+  interpolate,
   SharedValue,
   SlideInDown,
   SlideOutDown,
@@ -45,6 +46,7 @@ export default function Footer({
 
   const animatedFooterStyles = useAnimatedStyle(() => {
     return {
+      marginTop: interpolate(footerVisibility.value, [0, 1], [-85, 0]),
       opacity: footerVisibility.value,
     };
   });
