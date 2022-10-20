@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated, {
+  SharedValue,
   SlideInDown,
   SlideOutDown,
   useAnimatedStyle,
@@ -9,9 +10,12 @@ import Animated, {
   withSequence,
   withTiming,
 } from "react-native-reanimated";
-import { transform } from "typescript";
 
-export default function Footer() {
+export default function Footer({
+  footerVisibility,
+}: {
+  footerVisibility: SharedValue<number>;
+}) {
   const animatedStyles = useAnimatedStyle(() => {
     // text bounces up and down slightly and repeatedly
     return {
@@ -38,11 +42,17 @@ export default function Footer() {
       ),
     };
   });
+
+  const animatedFooterStyles = useAnimatedStyle(() => {
+    return {
+      opacity: footerVisibility.value,
+    };
+  });
   return (
     <Animated.View
       entering={SlideInDown}
       exiting={SlideOutDown}
-      style={styles.footer}
+      style={[styles.footer, animatedFooterStyles]}
     >
       <View style={styles.icon}>
         <MaterialCommunityIcons name="flashlight" size={24} color="white" />
