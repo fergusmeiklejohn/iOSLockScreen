@@ -18,9 +18,9 @@ export default function NotificationsList({
     onScroll: ({ contentOffset }) => {
       const yOffset = contentOffset.y;
       if (yOffset < 10) {
-        footerVisibility.value = withTiming(1);
+        footerVisibility.value = withTiming(1, { duration: 400 });
       } else {
-        footerVisibility.value = withTiming(0);
+        footerVisibility.value = withTiming(0, { duration: 400 });
       }
     },
   });

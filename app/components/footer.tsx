@@ -53,7 +53,6 @@ export default function Footer({
   return (
     <Animated.View
       entering={SlideInDown}
-      exiting={SlideOutDown}
       style={[styles.footer, animatedFooterStyles]}
     >
       <View style={styles.icon}>
