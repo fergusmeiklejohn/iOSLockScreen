@@ -5,6 +5,11 @@ import {
   Image,
   useWindowDimensions,
 } from "react-native";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 
 export const NOTIFICATION_HEIGHT = 80;
 
@@ -18,12 +23,27 @@ interface NotificationUIProps {
   };
 
   index: number;
+  listVisibility: Animated.SharedValue<number>;
 }
 
-export default function NotificationItem({ data, index }: NotificationUIProps) {
-  const { height, width } = useWindowDimensions();
+export default function NotificationItem({
+  data,
+  index,
+  listVisibility,
+}: NotificationUIProps) {
+  const { width, height } = useWindowDimensions();
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateY: interpolate(listVisibility.value, [0, 1], [height, 0]) },
+      ],
+    };
+  });
   return (
-    <View style={{ width: width - 20, ...styles.container }}>
+    <Animated.View
+      style={[{ width: width - 20, ...styles.container }, animatedStyles]}
+    >
       <Image source={data.icon} style={styles.icon} />
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{data.title}</Text>
@@ -32,7 +52,7 @@ export default function NotificationItem({ data, index }: NotificationUIProps) {
         </Text>
       </View>
       <Text style={styles.time}>{data.createdAt} ago</Text>
-    </View>
+    </Animated.View>
   );
 }
 
