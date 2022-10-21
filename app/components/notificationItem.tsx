@@ -37,29 +37,36 @@ export default function NotificationItem({
   const startPosition = NOTIFICATION_HEIGHT * index;
   // 250 is the height of the header, 85 is the height of the footer so this is the notification list height
   const containerHeight = height - 250 - 85;
+  const position1 = startPosition - containerHeight;
+  const position2 = startPosition + NOTIFICATION_HEIGHT - containerHeight;
 
   const animatedStyles = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          translateY: interpolate(
-            listVisibility.value,
-            [0, 1],
-            [containerHeight - startPosition, 0]
-          ),
+          translateY:
+            interpolate(
+              scrollY.value,
+              [position1, position2],
+              [-NOTIFICATION_HEIGHT, 0],
+              "clamp"
+            ) +
+            interpolate(
+              listVisibility.value,
+              [0, 1],
+              [containerHeight - startPosition, 0]
+            ),
         },
         {
-          scale: interpolate(listVisibility.value, [0, 1], [0.8, 1]),
+          scale: interpolate(
+            scrollY.value,
+            [position1, position2],
+            [0.6, 1],
+            "clamp"
+          ),
         },
       ],
-      opacity: interpolate(
-        scrollY.value,
-        [
-          startPosition - containerHeight,
-          startPosition + NOTIFICATION_HEIGHT - containerHeight,
-        ],
-        [0, 1]
-      ),
+      opacity: interpolate(scrollY.value, [position1, position2], [0, 1]),
     };
   });
   return (
