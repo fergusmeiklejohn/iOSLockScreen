@@ -6,6 +6,7 @@ import Animated, {
   SharedValue,
   useAnimatedScrollHandler,
   useSharedValue,
+  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { useState } from "react";
@@ -29,7 +30,7 @@ export default function NotificationsList({
     onBeginDrag(event, context) {
       // drag up brings back notifications if they are hidden
       if (listVisibility.value < 1) {
-        listVisibility.value = withTiming(1, { duration: 400 });
+        listVisibility.value = withSpring(1);
       }
     },
     onEndDrag(event, context) {

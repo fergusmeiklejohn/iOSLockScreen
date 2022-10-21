@@ -32,12 +32,24 @@ export default function NotificationItem({
   listVisibility,
 }: NotificationUIProps) {
   const { width, height } = useWindowDimensions();
+  const startPosition = NOTIFICATION_HEIGHT * index;
 
   const animatedStyles = useAnimatedStyle(() => {
     return {
+      // 250 is the height of the header, so we animate down the screen height - header height
       transform: [
-        { translateY: interpolate(listVisibility.value, [0, 1], [height, 0]) },
+        {
+          translateY: interpolate(
+            listVisibility.value,
+            [0, 1],
+            [height - 250 - startPosition, 0]
+          ),
+        },
+        {
+          scale: interpolate(listVisibility.value, [0, 1], [0.8, 1]),
+        },
       ],
+      opacity: interpolate(listVisibility.value, [0, 1], [0.3, 1]),
     };
   });
   return (
