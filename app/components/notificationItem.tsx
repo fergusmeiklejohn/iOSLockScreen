@@ -48,7 +48,7 @@ export default function NotificationItem({
             interpolate(
               scrollY.value,
               [position1, position2],
-              [-NOTIFICATION_HEIGHT, 0],
+              [-NOTIFICATION_HEIGHT / 2, 0],
               "clamp"
             ) +
             interpolate(

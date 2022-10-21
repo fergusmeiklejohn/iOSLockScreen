@@ -1,4 +1,4 @@
-import { FlatList, useWindowDimensions, View } from "react-native";
+import { View } from "react-native";
 import NotificationItem from "./notificationItem";
 import Header from "./header";
 import notifications from "../../assets/data/notifications.js";
@@ -9,7 +9,6 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { useState } from "react";
 
 export default function NotificationsList({
   footerVisibility,
