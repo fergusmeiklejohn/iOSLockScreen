@@ -24,32 +24,42 @@ interface NotificationUIProps {
 
   index: number;
   listVisibility: Animated.SharedValue<number>;
+  scrollY: Animated.SharedValue<number>;
 }
 
 export default function NotificationItem({
   data,
   index,
   listVisibility,
+  scrollY,
 }: NotificationUIProps) {
   const { width, height } = useWindowDimensions();
   const startPosition = NOTIFICATION_HEIGHT * index;
+  // 250 is the height of the header, 85 is the height of the footer so this is the notification list height
+  const containerHeight = height - 250 - 85;
 
   const animatedStyles = useAnimatedStyle(() => {
     return {
-      // 250 is the height of the header, so we animate down the screen height - header height
       transform: [
         {
           translateY: interpolate(
             listVisibility.value,
             [0, 1],
-            [height - 250 - startPosition, 0]
+            [containerHeight - startPosition, 0]
           ),
         },
         {
           scale: interpolate(listVisibility.value, [0, 1], [0.8, 1]),
         },
       ],
-      opacity: interpolate(listVisibility.value, [0, 1], [0.3, 1]),
+      opacity: interpolate(
+        scrollY.value,
+        [
+          startPosition - containerHeight,
+          startPosition + NOTIFICATION_HEIGHT - containerHeight,
+        ],
+        [0, 1]
+      ),
     };
   });
   return (

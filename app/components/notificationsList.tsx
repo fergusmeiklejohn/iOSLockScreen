@@ -1,4 +1,4 @@
-import { FlatList, useWindowDimensions } from "react-native";
+import { FlatList, useWindowDimensions, View } from "react-native";
 import NotificationItem from "./notificationItem";
 import Header from "./header";
 import notifications from "../../assets/data/notifications.js";
@@ -17,10 +17,12 @@ export default function NotificationsList({
   footerVisibility: SharedValue<number>;
 }) {
   const listVisibility = useSharedValue(1);
+  const scrollY = useSharedValue(0);
 
   const handler = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {
       const yOffset = contentOffset.y;
+      scrollY.value = yOffset;
       if (yOffset < 10) {
         footerVisibility.value = withTiming(1, { duration: 400 });
       } else {
@@ -44,6 +46,7 @@ export default function NotificationsList({
     <Animated.FlatList
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={<Header />}
+      ListFooterComponent={<View style={{ height: 85 }} />}
       data={notifications}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
@@ -51,6 +54,7 @@ export default function NotificationsList({
           data={item}
           index={index}
           listVisibility={listVisibility}
+          scrollY={scrollY}
         />
       )}
       onScroll={handler}
