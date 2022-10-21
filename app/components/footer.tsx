@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   icon: {
     backgroundColor: "#00000050",
     width: 50,
-    aspectRatio: 1,
+    height: 50,
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",

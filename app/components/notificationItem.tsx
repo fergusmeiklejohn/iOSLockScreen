@@ -39,7 +39,7 @@ export default function NotificationItem({ data, index }: NotificationUIProps) {
 const styles = StyleSheet.create({
   container: {
     height: NOTIFICATION_HEIGHT - 10,
-    backgroundColor: "#00000075",
+    backgroundColor: "#ffffff90",
     margin: 5,
     marginHorizontal: 10,
     padding: 13,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   time: {
-    color: "lightgray",
+    color: "#222222",
     fontSize: 12,
     position: "absolute",
     right: 10,
@@ -60,12 +60,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   title: {
-    color: "white",
+    color: "black",
     fontWeight: "500",
     // letterSpacing: 0.2,
   },
   subtitle: {
-    color: "white",
+    color: "black",
     lineHeight: 18,
     // letterSpacing: 0.2,
   },

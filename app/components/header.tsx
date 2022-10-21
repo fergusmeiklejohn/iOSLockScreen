@@ -19,11 +19,7 @@ export default function Header() {
   }, []);
 
   return (
-    <Animated.View
-      entering={SlideInUp.duration(1000)}
-      exiting={SlideOutUp}
-      style={styles.header}
-    >
+    <Animated.View entering={SlideInUp.duration(1000)} style={styles.header}>
       <Ionicons name="ios-lock-closed" size={24} color="white" />
       <Text style={styles.date}>{date}</Text>
       <Text style={styles.time}>{time}</Text>
