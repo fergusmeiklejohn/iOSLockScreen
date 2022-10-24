@@ -1,10 +1,9 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated, {
   interpolate,
   SharedValue,
   SlideInDown,
-  SlideOutDown,
   useAnimatedStyle,
   withDelay,
   withRepeat,

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import dayjs from "dayjs";
 import { Ionicons } from "@expo/vector-icons";
-import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
+import Animated, { SlideInUp } from "react-native-reanimated";
 
 export default function Header() {
   let [dateObj, setDateObj] = useState(dayjs());
