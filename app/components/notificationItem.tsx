@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
 
-export const NOTIFICATION_HEIGHT = 60;
+import { NOTIFICATION_HEIGHT } from "../utils/constants";
 
 interface NotificationUIProps {
   data: {
@@ -34,9 +34,9 @@ export default function NotificationItem({
   scrollY,
 }: NotificationUIProps) {
   const { width, height } = useWindowDimensions();
-  const startPosition = NOTIFICATION_HEIGHT * index + 25;
+  const startPosition = NOTIFICATION_HEIGHT * index;
   // 250 is the height of the header, 130 is the height of the footer so this is the notification list height
-  const containerHeight = height - 250 - 130;
+  const containerHeight = height - 250 - NOTIFICATION_HEIGHT;
   const position1 = startPosition - containerHeight;
   const position2 = startPosition + NOTIFICATION_HEIGHT - containerHeight;
 

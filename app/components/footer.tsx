@@ -45,7 +45,7 @@ export default function Footer({
 
   const animatedFooterStyles = useAnimatedStyle(() => {
     return {
-      marginTop: interpolate(footerVisibility.value, [0, 1], [-85, 0]),
+      marginTop: interpolate(footerVisibility.value, [0, 1], [-130, 0]),
       opacity: footerVisibility.value,
     };
   });
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: "auto",
-    height: 130,
+    height: 100,
     alignSelf: "stretch",
     paddingHorizontal: 50,
     paddingVertical: 10,

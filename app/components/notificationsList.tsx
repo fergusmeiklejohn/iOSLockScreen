@@ -10,6 +10,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
+import { NOTIFICATION_HEIGHT } from "../utils/constants";
+
 export default function NotificationsList({
   footerVisibility,
 }: {
@@ -23,9 +25,9 @@ export default function NotificationsList({
       const yOffset = contentOffset.y;
       scrollY.value = yOffset;
       if (yOffset < 10) {
-        footerVisibility.value = withTiming(1, { duration: 400 });
+        footerVisibility.value = withTiming(1);
       } else {
-        footerVisibility.value = withTiming(0, { duration: 400 });
+        footerVisibility.value = withTiming(0);
       }
     },
     onBeginDrag(event, context) {
@@ -45,7 +47,7 @@ export default function NotificationsList({
     <Animated.FlatList
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={<Header />}
-      ListFooterComponent={<View style={{ height: 130 }} />}
+      ListFooterComponent={<View style={{ height: NOTIFICATION_HEIGHT }} />}
       data={notifications}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
