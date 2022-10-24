@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: "auto",
-    height: 85,
+    height: 100,
     alignSelf: "stretch",
     paddingHorizontal: 50,
     paddingVertical: 10,

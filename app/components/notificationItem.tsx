@@ -33,9 +33,9 @@ export default function NotificationItem({
   scrollY,
 }: NotificationUIProps) {
   const { width, height } = useWindowDimensions();
-  const startPosition = NOTIFICATION_HEIGHT * index;
-  // 250 is the height of the header, 85 is the height of the footer so this is the notification list height
-  const containerHeight = height - 250 - 85;
+  const startPosition = NOTIFICATION_HEIGHT * index + 25;
+  // 250 is the height of the header, 100 is the height of the footer so this is the notification list height
+  const containerHeight = height - 250 - 100;
   const position1 = startPosition - containerHeight;
   const position2 = startPosition + NOTIFICATION_HEIGHT - containerHeight;
 
@@ -47,7 +47,7 @@ export default function NotificationItem({
             interpolate(
               scrollY.value,
               [position1, position2],
-              [-NOTIFICATION_HEIGHT / 2, 0],
+              [-50, 0],
               "clamp"
             ) +
             interpolate(
@@ -75,7 +75,7 @@ export default function NotificationItem({
       <Image source={data.icon} style={styles.icon} />
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.subtitle} numberOfLines={2}>
+        <Text style={styles.subtitle} numberOfLines={3}>
           {data.subtitle}
         </Text>
       </View>
@@ -86,7 +86,7 @@ export default function NotificationItem({
 
 const styles = StyleSheet.create({
   container: {
-    height: NOTIFICATION_HEIGHT - 10,
+    // height: NOTIFICATION_HEIGHT - 10,
     backgroundColor: "#ffffff90",
     margin: 5,
     marginHorizontal: 10,
