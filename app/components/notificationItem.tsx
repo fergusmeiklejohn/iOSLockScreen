@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
 
-export const NOTIFICATION_HEIGHT = 80;
+export const NOTIFICATION_HEIGHT = 60;
 
 interface NotificationUIProps {
   data: {
@@ -74,6 +74,7 @@ export default function NotificationItem({
       <BlurView
         style={{ width: width - 20, ...styles.container }}
         intensity={25}
+        tint="light"
       >
         <Image source={data.icon} style={styles.icon} />
         <View style={{ flex: 1 }}>

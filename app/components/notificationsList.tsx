@@ -45,7 +45,7 @@ export default function NotificationsList({
     <Animated.FlatList
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={<Header />}
-      ListFooterComponent={<View style={{ height: 85 }} />}
+      ListFooterComponent={<View style={{ height: 130 }} />}
       data={notifications}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
