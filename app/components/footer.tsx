@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: "auto",
-    height: 100,
+    height: 130,
     alignSelf: "stretch",
     paddingHorizontal: 50,
     paddingVertical: 10,
@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
+    marginTop: 20,
   },
 });

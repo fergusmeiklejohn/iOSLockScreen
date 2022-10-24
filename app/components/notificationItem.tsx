@@ -9,6 +9,7 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { BlurView } from "expo-blur";
 
 export const NOTIFICATION_HEIGHT = 80;
 
@@ -34,8 +35,8 @@ export default function NotificationItem({
 }: NotificationUIProps) {
   const { width, height } = useWindowDimensions();
   const startPosition = NOTIFICATION_HEIGHT * index + 25;
-  // 250 is the height of the header, 100 is the height of the footer so this is the notification list height
-  const containerHeight = height - 250 - 100;
+  // 250 is the height of the header, 130 is the height of the footer so this is the notification list height
+  const containerHeight = height - 250 - 130;
   const position1 = startPosition - containerHeight;
   const position2 = startPosition + NOTIFICATION_HEIGHT - containerHeight;
 
@@ -69,17 +70,20 @@ export default function NotificationItem({
     };
   });
   return (
-    <Animated.View
-      style={[{ width: width - 20, ...styles.container }, animatedStyles]}
-    >
-      <Image source={data.icon} style={styles.icon} />
-      <View style={{ flex: 1 }}>
-        <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.subtitle} numberOfLines={3}>
-          {data.subtitle}
-        </Text>
-      </View>
-      <Text style={styles.time}>{data.createdAt} ago</Text>
+    <Animated.View style={animatedStyles}>
+      <BlurView
+        style={{ width: width - 20, ...styles.container }}
+        intensity={25}
+      >
+        <Image source={data.icon} style={styles.icon} />
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.subtitle} numberOfLines={3}>
+            {data.subtitle}
+          </Text>
+        </View>
+        <Text style={styles.time}>{data.createdAt} ago</Text>
+      </BlurView>
     </Animated.View>
   );
 }
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
+    overflow: "hidden",
   },
   time: {
     color: "#222222",
