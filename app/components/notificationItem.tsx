@@ -83,7 +83,7 @@ export default function NotificationItem({
             {data.subtitle}
           </Text>
         </View>
-        <Text style={styles.time}>{data.createdAt} ago</Text>
+        <Text style={styles.time}>{data.createdAt}</Text>
       </BlurView>
     </Animated.View>
   );
