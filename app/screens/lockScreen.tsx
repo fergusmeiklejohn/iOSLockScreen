@@ -35,10 +35,9 @@ const clamped = (value, min, max) => {
 };
 
 export default function LockScreen() {
+  const { width, height } = useWindowDimensions();
   const footerVisibility = useSharedValue(1);
   const dragY = useSharedValue(0);
-
-  const { width, height } = useWindowDimensions();
 
   // const sensor = useAnimatedSensor(SensorType.ROTATION);
   // const animatedStyles = useAnimatedStyle(() => {
@@ -59,8 +58,8 @@ export default function LockScreen() {
     return {
       transform: [
         {
-          translateY: withTiming(dragY.value, {
-            duration: 50,
+          translateY: withTiming(-(height - dragY.value), {
+            duration: 150,
             easing: Easing.linear,
           }),
         },
@@ -69,17 +68,16 @@ export default function LockScreen() {
   });
 
   const unlockHandler = useAnimatedGestureHandler({
-    onStart: () => {
-      console.log("start");
-    },
     onActive: (event) => {
-      dragY.value = clamped(event.translationY, -height, 0);
+      dragY.value = clamped(event.absoluteY, 0, height);
     },
     onEnd: () => {
-      if (-dragY.value > height / 2) {
-        dragY.value = withTiming(-height, { duration: 300 });
-      } else {
+      if (dragY.value < height / 2) {
+        console.log("onEnd if");
         dragY.value = withTiming(0, { duration: 300 });
+      } else {
+        console.log("onEnd else");
+        dragY.value = withTiming(height, { duration: 300 });
       }
     },
   });
@@ -118,7 +116,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: 200,
-    backgroundColor: "red",
     bottom: 0,
     left: 0,
     transform: [{ translateY: 100 }],
