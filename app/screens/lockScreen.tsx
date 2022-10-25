@@ -40,20 +40,20 @@ export default function LockScreen() {
 
   const { width, height } = useWindowDimensions();
 
-  const sensor = useAnimatedSensor(SensorType.ROTATION);
-  const animatedStyles = useAnimatedStyle(() => {
-    const { pitch, roll } = sensor.sensor.value;
+  // const sensor = useAnimatedSensor(SensorType.ROTATION);
+  // const animatedStyles = useAnimatedStyle(() => {
+  //   const { pitch, roll } = sensor.sensor.value;
 
-    return {
-      top: withTiming(
-        interpolate(pitch, [-HALF_PI, HALF_PI], [-IMAGE_OFFSET * 2, 0]),
-        { duration: 100 }
-      ),
-      left: withTiming(interpolate(roll, [-PI, PI], [-IMAGE_OFFSET * 2, 0]), {
-        duration: 100,
-      }),
-    };
-  });
+  //   return {
+  //     top: withTiming(
+  //       interpolate(pitch, [-HALF_PI, HALF_PI], [-IMAGE_OFFSET * 2, 0]),
+  //       { duration: 100 }
+  //     ),
+  //     left: withTiming(interpolate(roll, [-PI, PI], [-IMAGE_OFFSET * 2, 0]), {
+  //       duration: 100,
+  //     }),
+  //   };
+  // });
 
   const animatedDragWindowYStyles = useAnimatedStyle(() => {
     return {
@@ -84,45 +84,24 @@ export default function LockScreen() {
     },
   });
   return (
-    <Animated.View style={[styles.window, animatedDragWindowYStyles]}>
+    <Animated.View style={[animatedDragWindowYStyles]}>
       <Image
         source={wallpaper}
         style={[
           {
-            width: width + 2 * IMAGE_OFFSET,
-            height: height + 2 * IMAGE_OFFSET,
+            width: width,
+            height: height,
             position: "absolute",
           },
           styles.container,
-          animatedStyles,
+          // animatedStyles,
         ]}
       />
-      {/* <PanGestureHandler onGestureEvent={unlockHandler}>
-        <Animated.View
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: 100,
-            backgroundColor: "green",
-            top: 0,
-            left: 0,
-          }}
-        />
-      </PanGestureHandler> */}
 
       <NotificationsList footerVisibility={footerVisibility} />
       <Footer footerVisibility={footerVisibility} />
       <PanGestureHandler onGestureEvent={unlockHandler}>
-        <Animated.View
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: 100,
-            backgroundColor: "red",
-            bottom: 0,
-            left: 0,
-          }}
-        />
+        <Animated.View style={styles.unlockGestureHandler} />
       </PanGestureHandler>
     </Animated.View>
   );
@@ -135,7 +114,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  window: {
-    overflow: "hidden",
+  unlockGestureHandler: {
+    position: "absolute",
+    width: "100%",
+    height: 200,
+    backgroundColor: "red",
+    bottom: 0,
+    left: 0,
+    transform: [{ translateY: 100 }],
   },
 });

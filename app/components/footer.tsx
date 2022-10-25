@@ -91,6 +91,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-    marginTop: 20,
+    marginTop: 10,
   },
 });
