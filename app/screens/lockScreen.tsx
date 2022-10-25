@@ -10,6 +10,7 @@ import Animated, {
   useSharedValue,
   useAnimatedSensor,
   useAnimatedStyle,
+  useAnimatedProps,
   useAnimatedGestureHandler,
   SensorType,
   interpolate,
@@ -24,6 +25,7 @@ import wallpaper from "../../assets/images/wallpaper.webp";
 
 import Footer from "../components/footer";
 import NotificationsList from "../components/notificationsList";
+import { BlurView } from "expo-blur";
 
 const IMAGE_OFFSET = 100;
 const PI = Math.PI;
@@ -34,10 +36,12 @@ const clamped = (value, min, max) => {
   return Math.min(Math.max(value, min), max);
 };
 
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
 export default function LockScreen() {
   const { width, height } = useWindowDimensions();
   const footerVisibility = useSharedValue(1);
-  const dragY = useSharedValue(0);
+  const dragY = useSharedValue(height);
 
   // const sensor = useAnimatedSensor(SensorType.ROTATION);
   // const animatedStyles = useAnimatedStyle(() => {
@@ -93,27 +97,42 @@ export default function LockScreen() {
       }
     },
   });
-  return (
-    <Animated.View style={[animatedDragWindowYStyles]}>
-      <Image
-        source={wallpaper}
-        style={[
-          {
-            width: width,
-            height: height,
-            position: "absolute",
-          },
-          styles.container,
-          // animatedStyles,
-        ]}
-      />
 
-      <NotificationsList footerVisibility={footerVisibility} />
-      <Footer footerVisibility={footerVisibility} />
-      <PanGestureHandler onGestureEvent={unlockHandler}>
-        <Animated.View style={styles.unlockGestureHandler} />
-      </PanGestureHandler>
-    </Animated.View>
+  const homeScreenAnimatedBlur = useAnimatedProps(() => ({
+    intensity: interpolate(dragY.value, [0, height], [0, 100]),
+  }));
+  const lockScreenAnimatedBlur = useAnimatedProps(() => ({
+    intensity: interpolate(dragY.value, [0, height], [100, 0]),
+  }));
+
+  return (
+    <AnimatedBlurView animatedProps={homeScreenAnimatedBlur}>
+      <Animated.View style={[animatedDragWindowYStyles]}>
+        <ImageBackground
+          source={wallpaper}
+          style={[
+            {
+              width: width,
+              height: height,
+              position: "relative",
+              // position: "absolute",
+              // top: 0,
+              // left: 0,
+            },
+            styles.container,
+            // animatedStyles,
+          ]}
+        >
+          <AnimatedBlurView animatedProps={lockScreenAnimatedBlur}>
+            <NotificationsList footerVisibility={footerVisibility} />
+            <Footer footerVisibility={footerVisibility} />
+          </AnimatedBlurView>
+          <PanGestureHandler onGestureEvent={unlockHandler}>
+            <Animated.View style={styles.unlockGestureHandler} />
+          </PanGestureHandler>
+        </ImageBackground>
+      </Animated.View>
+    </AnimatedBlurView>
   );
 }
 

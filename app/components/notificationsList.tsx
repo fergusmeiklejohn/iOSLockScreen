@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { NOTIFICATION_HEIGHT } from "../utils/constants";
+import { FOOTER_HEIGHT } from "../utils/constants";
 
 export default function NotificationsList({
   footerVisibility,
@@ -47,7 +47,7 @@ export default function NotificationsList({
     <Animated.FlatList
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={<Header />}
-      ListFooterComponent={<View style={{ height: NOTIFICATION_HEIGHT }} />}
+      ListFooterComponent={<View style={{ height: FOOTER_HEIGHT }} />}
       data={notifications}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (

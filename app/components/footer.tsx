@@ -10,6 +10,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from "react-native-reanimated";
+import { FOOTER_HEIGHT } from "../utils/constants";
 
 export default function Footer({
   footerVisibility,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: "auto",
-    height: 100,
+    height: FOOTER_HEIGHT,
     alignSelf: "stretch",
     paddingHorizontal: 50,
     paddingVertical: 10,
