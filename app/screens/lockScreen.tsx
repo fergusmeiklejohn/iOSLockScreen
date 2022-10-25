@@ -71,13 +71,25 @@ export default function LockScreen() {
     onActive: (event) => {
       dragY.value = clamped(event.absoluteY, 0, height);
     },
-    onEnd: () => {
-      if (dragY.value < height / 2) {
-        console.log("onEnd if");
-        dragY.value = withTiming(0, { duration: 300 });
+    onEnd: (event) => {
+      if (event.velocityY > 500) {
+        if (dragY.value < height / 2) {
+          dragY.value = withTiming(0, { duration: 50, easing: Easing.linear });
+        } else {
+          dragY.value = withTiming(height, {
+            duration: 50,
+            easing: Easing.linear,
+          });
+        }
       } else {
-        console.log("onEnd else");
-        dragY.value = withTiming(height, { duration: 300 });
+        if (dragY.value < height / 2) {
+          dragY.value = withTiming(0, { duration: 50, easing: Easing.linear });
+        } else {
+          dragY.value = withTiming(height, {
+            duration: 50,
+            easing: Easing.linear,
+          });
+        }
       }
     },
   });
