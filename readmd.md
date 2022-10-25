@@ -6,5 +6,6 @@
 
 Use the Expo app to run the app on your phone or in the simulator.
 
-## [React Native](https://facebook.github.io/react-native/)
-## [Expo](https://expo.io/)
+[React Native](https://facebook.github.io/react-native/)
+
+[Expo](https://expo.io/)
