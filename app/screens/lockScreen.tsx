@@ -43,20 +43,20 @@ export default function LockScreen() {
   const footerVisibility = useSharedValue(1);
   const dragY = useSharedValue(height);
 
-  // const sensor = useAnimatedSensor(SensorType.ROTATION);
-  // const animatedStyles = useAnimatedStyle(() => {
-  //   const { pitch, roll } = sensor.sensor.value;
+  const sensor = useAnimatedSensor(SensorType.ROTATION);
+  const animatedStyles = useAnimatedStyle(() => {
+    const { pitch, roll } = sensor.sensor.value;
 
-  //   return {
-  //     top: withTiming(
-  //       interpolate(pitch, [-HALF_PI, HALF_PI], [-IMAGE_OFFSET * 2, 0]),
-  //       { duration: 100 }
-  //     ),
-  //     left: withTiming(interpolate(roll, [-PI, PI], [-IMAGE_OFFSET * 2, 0]), {
-  //       duration: 100,
-  //     }),
-  //   };
-  // });
+    return {
+      top: withTiming(
+        interpolate(pitch, [-HALF_PI, HALF_PI], [-IMAGE_OFFSET * 2, 0]),
+        { duration: 100 }
+      ),
+      left: withTiming(interpolate(roll, [-PI, PI], [-IMAGE_OFFSET * 2, 0]), {
+        duration: 100,
+      }),
+    };
+  });
 
   const animatedDragWindowYStyles = useAnimatedStyle(() => {
     return {
@@ -115,12 +115,9 @@ export default function LockScreen() {
               width: width,
               height: height,
               position: "relative",
-              // position: "absolute",
-              // top: 0,
-              // left: 0,
             },
             styles.container,
-            // animatedStyles,
+            animatedStyles,
           ]}
         >
           <AnimatedBlurView animatedProps={lockScreenAnimatedBlur}>
