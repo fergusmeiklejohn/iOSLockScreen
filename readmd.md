@@ -1,4 +1,4 @@
-***iOS lock-screen demo built with React Native using Expo***
+***iOS 16 lock-screen demo built with React Native using Expo***
 
 `yarn` to install dependencies.
 
